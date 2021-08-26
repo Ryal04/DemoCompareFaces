@@ -1,13 +1,13 @@
 ﻿using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
 using Amazon.S3;
-using Amazon.S3.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
+
 
 namespace DemoRekogWeb.Controllers
 {
@@ -27,72 +27,34 @@ namespace DemoRekogWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadImageToAWS([FromForm] IFormFile file1, IFormFile file2) {
 
-            //bucketName (Nombre de Repositorio de Almacenamiento) 
-            var bucketName = "rdy-bucket-1209";
-
             if (file1 != null && file2 != null )
             {
-
-                // Upload Imagen uno
-                var putRequest1 = new PutObjectRequest()
+                Image ImageSource = new Image();
+                using (var ms = new MemoryStream())
                 {
-                    BucketName = bucketName,
-                    Key = file1.FileName,
-                    InputStream = file1.OpenReadStream(),
-                    ContentType = file1.ContentType,
-                };
+                    file1.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    ImageSource.Bytes = new MemoryStream(ms.ToArray());
+                    // act on the Base64 data
+                }
 
-                await this.amazons3.PutObjectAsync(putRequest1);
-
-                // Upload Imagen dos
-                var putRequest2 = new PutObjectRequest()
+                Image ImageTarget = new Image();
+                using (var ms = new MemoryStream())
                 {
-                    BucketName = bucketName,
-                    Key = file2.FileName,
-                    InputStream = file2.OpenReadStream(),
-                    ContentType = file2.ContentType,
-                };
+                    file2.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    ImageTarget.Bytes = new MemoryStream(ms.ToArray());
+                    // act on the Base64 data
+                }
 
-                await this.amazons3.PutObjectAsync(putRequest2);
-
-
-                // Comparacion de Rostros de Imagenes 
                 var response = await rekognition.CompareFacesAsync(new CompareFacesRequest()
                 {
-                    SourceImage = new Image()
-                    {
-                        
-                        
-                        
-                        S3Object = new Amazon.Rekognition.Model.S3Object()
-                        {
-                            Bucket = bucketName,
-                            Name = file1.FileName
-                        }
-                    },
-                    TargetImage = new Image()
-                    {
-
-                        S3Object = new Amazon.Rekognition.Model.S3Object()
-                        {
-                            Bucket = bucketName,
-                            Name = file2.FileName
-                        }
-                    },
+                    SourceImage = ImageSource,
+                    TargetImage = ImageTarget,
                     // Umbral de Similaridad
                     SimilarityThreshold = 90
                 });
 
-                // Elimina las imagenes subidas en la solicitud 
-                await this.amazons3.DeleteObjectAsync(bucketName, file1.FileName);
-                await this.amazons3.DeleteObjectAsync(bucketName, file2.FileName);
-
-                
-
-                foreach (var label in response.FaceMatches)
-                {
-                    return Ok(label.Similarity);
-                }
 
                 //Respuesta
                 return Ok(response);

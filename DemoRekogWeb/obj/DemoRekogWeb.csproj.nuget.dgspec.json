@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\practecnologia03\\source\\repos\\DemoRekogWeb\\DemoRekogWeb\\DemoRekogWeb.csproj": {}
+    "D:\\Users\\practecnologia03\\Documents\\Project\\DemoRekogWeb\\DemoRekogWeb\\DemoRekogWeb.csproj": {}
   },
   "projects": {
-    "D:\\Users\\practecnologia03\\source\\repos\\DemoRekogWeb\\DemoRekogWeb\\DemoRekogWeb.csproj": {
+    "D:\\Users\\practecnologia03\\Documents\\Project\\DemoRekogWeb\\DemoRekogWeb\\DemoRekogWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\practecnologia03\\source\\repos\\DemoRekogWeb\\DemoRekogWeb\\DemoRekogWeb.csproj",
+        "projectUniqueName": "D:\\Users\\practecnologia03\\Documents\\Project\\DemoRekogWeb\\DemoRekogWeb\\DemoRekogWeb.csproj",
         "projectName": "DemoRekogWeb",
-        "projectPath": "D:\\Users\\practecnologia03\\source\\repos\\DemoRekogWeb\\DemoRekogWeb\\DemoRekogWeb.csproj",
+        "projectPath": "D:\\Users\\practecnologia03\\Documents\\Project\\DemoRekogWeb\\DemoRekogWeb\\DemoRekogWeb.csproj",
         "packagesPath": "D:\\Users\\practecnologia03\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\practecnologia03\\source\\repos\\DemoRekogWeb\\DemoRekogWeb\\obj\\",
+        "outputPath": "D:\\Users\\practecnologia03\\Documents\\Project\\DemoRekogWeb\\DemoRekogWeb\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "D:\\Users\\practecnologia03\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "A6h29cjJzDiPMgpstkyjbuncp8x4/cjV4iFiTqolAMfCROOi/R0O697fGZoxtUDQ0voqlq2auNyJTlL+1Sflmw==",
+  "dgSpecHash": "jXg7oH87y4ADhiCj1X6zcw9dcWdUFqmFvf3COQ6393bv86GNlNye+DPTqVZyGC2lh7aNQDFXyTOTjllhBQbJgg==",
   "success": true,
-  "projectFilePath": "D:\\Users\\practecnologia03\\source\\repos\\DemoRekogWeb\\DemoRekogWeb\\DemoRekogWeb.csproj",
+  "projectFilePath": "D:\\Users\\practecnologia03\\Documents\\Project\\DemoRekogWeb\\DemoRekogWeb\\DemoRekogWeb.csproj",
   "expectedPackageFiles": [
     "D:\\Users\\practecnologia03\\.nuget\\packages\\awssdk.core\\3.7.2.6\\awssdk.core.3.7.2.6.nupkg.sha512",
     "D:\\Users\\practecnologia03\\.nuget\\packages\\awssdk.extensions.netcore.setup\\3.7.1\\awssdk.extensions.netcore.setup.3.7.1.nupkg.sha512",
