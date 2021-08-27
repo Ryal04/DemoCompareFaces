@@ -1,6 +1,5 @@
 ﻿using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
-using Amazon.S3;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,41 +14,43 @@ namespace DemoRekogWeb.Controllers
     [ApiController]
     public class ImageController : ControllerBase
     {
-        private readonly IAmazonS3 amazons3;
+
         private readonly IAmazonRekognition rekognition;
 
-        public ImageController(IAmazonS3 amazons3, IAmazonRekognition rekognition)
+        public ImageController(IAmazonRekognition rekognition)
         {
-            this.amazons3 = amazons3;
             this.rekognition = rekognition;
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadImageToAWS([FromForm] IFormFile file1, IFormFile file2) {
+        public async Task<IActionResult> UploadImageToAWS([FromForm] IFormFile CedFrontal, IFormFile Foto) {
 
-            if (file1 != null && file2 != null )
+            if (Foto != null && CedFrontal != null )
             {
+
+                //Convercion Imagen
                 Image ImageSource = new Image();
                 using (var ms = new MemoryStream())
                 {
-                    file1.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
+                    Foto.CopyTo(ms);
                     ImageSource.Bytes = new MemoryStream(ms.ToArray());
                     // act on the Base64 data
                 }
 
+                //Convercion Imagen
                 Image ImageTarget = new Image();
                 using (var ms = new MemoryStream())
                 {
-                    file2.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
+                    CedFrontal.CopyTo(ms);
                     ImageTarget.Bytes = new MemoryStream(ms.ToArray());
                     // act on the Base64 data
                 }
 
                 var response = await rekognition.CompareFacesAsync(new CompareFacesRequest()
                 {
+                    //Imagen Byte 1
                     SourceImage = ImageSource,
+                    //Imagen Byte 2
                     TargetImage = ImageTarget,
                     // Umbral de Similaridad
                     SimilarityThreshold = 90
